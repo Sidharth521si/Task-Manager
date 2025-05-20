@@ -78,6 +78,8 @@ A clean and modern Task Manager Android application built using **Kotlin** and *
 
 ![Home page](Images/Image1.png)
 
+![News Page](Images/Image2.png)
+
 
 ---
 
