@@ -340,7 +340,7 @@ fun HomeScreen(taskDao: TaskDao, themeViewModel: ThemeViewModel) {
             }
         }
     }
-
+// dialog box for priority pick
     if (showPriorityDialog) {
         PriorityDialog(
             selectedPriority = selectedPriority,
@@ -352,7 +352,7 @@ fun HomeScreen(taskDao: TaskDao, themeViewModel: ThemeViewModel) {
             onDismiss = { showPriorityDialog = false }
         )
     }
-
+// dialog for date pick
     if (showDatePicker) {
         val now = Calendar.getInstance()
         DatePickerDialog(
@@ -424,7 +424,7 @@ fun HomeScreen(taskDao: TaskDao, themeViewModel: ThemeViewModel) {
 }
 
 
-
+// Setting Screen Layout
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreenContent(themeViewModel: ThemeViewModel) {
@@ -444,7 +444,7 @@ fun SettingsScreenContent(themeViewModel: ThemeViewModel) {
 //            Dashboard(viewModel = statsViewModel)
 
 
-            // Theme Toggle Card
+            // Dark/light mode switch
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp),
@@ -471,7 +471,7 @@ fun SettingsScreenContent(themeViewModel: ThemeViewModel) {
             )
 
 
-            // GitHub Card
+            // GitHub link
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp),
@@ -492,7 +492,7 @@ fun SettingsScreenContent(themeViewModel: ThemeViewModel) {
                 )
             }
 
-            // Feedback Card
+            // Feedback link
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp),
@@ -574,12 +574,13 @@ fun PriorityDialog(
         }
     )
 }
+// Add task field
 
 @Composable
 fun AddTask(
     task: String,
     onTaskChanged: (String) -> Unit,
-    onTaskAdded: () -> Unit  // Removed unused parameters
+    onTaskAdded: () -> Unit  
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Box(
@@ -610,6 +611,7 @@ fun AddTask(
     }
 }
 
+// List of task items
 @Composable
 fun TaskItem(
     taskItem: TaskItemData,
@@ -617,9 +619,9 @@ fun TaskItem(
 ) {
     Log.d("TaskItemDebug", "Task: ${taskItem.task}")
     val priorityColor = when (taskItem.selectedPriority) {
-        "High" -> Color(0xFFFFCDD2) // Light Red
-        "Medium" -> Color(0xFFFFF9C4) // Light Yellow
-        "Low" -> Color(0xFFC8E6C9) // Light Green
+        "High" -> Color(0xFFFFCDD2) 
+        "Medium" -> Color(0xFFFFF9C4) 
+        "Low" -> Color(0xFFC8E6C9) 
         else -> Color.White
     }
 
@@ -849,7 +851,7 @@ fun PreviewHomeScreen() {
 
     }
 }
-
+// code for notification manager
 fun createNotificationChannel(context: Context) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         val channelId = "task_reminder_channel"
@@ -867,6 +869,7 @@ fun createNotificationChannel(context: Context) {
         notificationManager.createNotificationChannel(channel)
     }
 }
+// class for dark/light theme
 
 class ThemeViewModel : ViewModel() {
     private val _isDarkTheme = mutableStateOf(false)
@@ -877,6 +880,7 @@ class ThemeViewModel : ViewModel() {
     }
 }
 
+// class for database
 class TaskRepository(private val dao: TaskDao) {
     suspend fun statsSince(since: Long): Pair<Int,Int> {
         val created = dao.countCreatedSince(since)
@@ -971,6 +975,7 @@ fun Dashboard(viewModel: StatsViewModel = viewModel()) {
         )
     }
 }
+// class for new API
 
 class NewsViewModel : ViewModel() {
     var newsList by mutableStateOf<List<Article>>(emptyList())
@@ -997,7 +1002,7 @@ class NewsViewModel : ViewModel() {
         }
     }
 }
-
+// news page layout
 
 @Composable
 fun NewsCard(article: Article) {
@@ -1032,7 +1037,7 @@ fun NewsCard(article: Article) {
     }
 }
 
-
+// new page layout
 @Composable
 fun NewsApp(viewModel: NewsViewModel = viewModel()) {
     val articles = viewModel.newsList
