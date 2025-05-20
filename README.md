@@ -75,6 +75,10 @@ A clean and modern Task Manager Android application built using **Kotlin** and *
 - Kotlin 1.9+
 - NewsAPI key from [https://newsapi.org](https://newsapi.org)
 
+
+![Home page And News Page](Images/Image1.png,Image2.png)
+
+
 ---
 
 
